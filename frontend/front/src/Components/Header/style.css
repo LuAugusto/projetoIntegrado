@@ -1,0 +1,30 @@
+.container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0;
+  padding: 10px 10px;
+  
+}
+.logo{
+  max-width: 180px;
+  max-height: 180px;
+}
+.menu{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+ 
+}
+.menu a{
+  text-decoration: none;
+  list-style: none;
+  padding: 15px;
+  color:#fff;
+  border-bottom:3px solid black;
+}
+.menu a:hover{
+  cursor:pointer;
+  border-bottom:3px solid #242424;
+  color:#242424;
+}

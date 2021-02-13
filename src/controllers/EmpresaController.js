@@ -1,20 +1,20 @@
-const User = require('../models/User');
+const Empresa = require('../models/Empresa');
 const Yup = require('yup');
 const bcrypt = require('bcryptjs');
 
-class CadastroController{
+class EmpresaController{
       async store(req,res){
             try{
                   const schema = Yup.object().shape({
                         email:Yup.string().required().email(),
-                        cpf:Yup.string().required(),
+                        cnpj:Yup.string().required(),
                         nome:Yup.string().required(),
                         endereco:Yup.string().required(),
                         telefone:Yup.number().required(),
                         password:Yup.string().required(),
                   })
                   
-                  const {email,nome,endereco,telefone,cpf} = req.body;
+                  const {email,nome,endereco,telefone,cnpj} = req.body;
                   const password = bcrypt.hashSync(req.body.password,10);
 
                   
@@ -23,25 +23,24 @@ class CadastroController{
                   }
                   
 
-                  const user = await User.findOne({email:email});
-                  if(user){
+                  const empresa = await Empresa.findOne({cnpj:cnpj});
+                  if(empresa){
                         return res.status(401).json({error:'Usuario já existe'});
                   }
 
-                  const newUser = await User.create({
+                  const newEmpresa = await Empresa.create({
                         email,
                         nome,
-                        cpf,
+                        cnpj,
                         endereco,
                         telefone,
                         password,
                   })
 
-                  return res.json(newUser);
+                  return res.json(newEmpresa);
             }catch(error){
                   console.log(error);
             }
       }
 }
-
-module.exports = new CadastroController();
+module.exports = new EmpresaController();
